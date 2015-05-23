@@ -71,7 +71,7 @@ public class ParticipantManager {
 		try {
 			events = (List<EventInfoForParticipant>) session
 					.createQuery(
-							"select new output.EventInfoForParticipant(t.cost, e.name, e.dateOfEvent, e.subtitle, e.organizer, e.place, e.description, e.picture, e.backgroundFile)" 
+							"select new output.EventInfoForParticipant(t.cost, e.id, e.name, e.dateOfEvent, e.subtitle, e.organizer, e.place, e.description, e.picture, e.backgroundFile)" 
 					+ " from Participant p join p.ticket t join p.event e"
 									+ " where personId = ?")
 					.setString(0, personId).list();

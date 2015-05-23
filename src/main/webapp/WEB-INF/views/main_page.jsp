@@ -6,9 +6,9 @@
 	
 	<div class="Container container">
 		
-		  <div class="jumbotron">
+		  <div style="text-align: center" class="jumbotron">
 	        <h1>Welcome <c:out value="${username}"></c:out>!</h1>
-	        <p class="lead">It's great to have you here! Scroll down to dive in to the world of events! Welcome to EventZone!</p>
+	        <p style="margin-top: 30px" class="lead">It's great to have you here! Scroll down to dive in to the world of events! Welcome to EventZone!</p>
 	      </div>
 		 <div class="row marketing">
         <div class="col-lg-6">

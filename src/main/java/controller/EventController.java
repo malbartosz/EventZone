@@ -28,7 +28,7 @@ public class EventController {
 				SecurityContextHolder.getContext().getAuthentication().getName();
 		Event event = eventManager.getEventById(id);
 		
-		model.addObject("eventName", event.getName());
+		model.addObject("event", event);
 		model.addObject("username", username);
 		return model; 
 	}

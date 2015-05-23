@@ -26,6 +26,18 @@ public class Event {
 		this.backgroundFile = backgroundFile;
 	}
 	
+	public Event(int id, String name, Date dateOfEvent, String subtitle, String organizer, String place, String description, String picture,  String backgroundFile) {
+		this.id = id;
+		this.name = name;
+		this.subtitle = subtitle;
+		this.organizer = organizer;
+		this.dateOfEvent = dateOfEvent;
+		this.place = place;
+		this.description = description;
+		this.picture = picture;
+		this.backgroundFile = backgroundFile;
+	}
+	
 	public Event(int id, String name, String subtitle, String organizer,
 			String place, Date dateOfEvent, Date dateOfCreation,
 			String description, String picture, String backgroundFile, Set<Ticket> tickets,
