@@ -104,4 +104,8 @@ public class EventManager {
             throw e;
         }
     }
+    
+    public boolean subscribeToAnEvent(int eventId){
+    	return true;
+    }
 }

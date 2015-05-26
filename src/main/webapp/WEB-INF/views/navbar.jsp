@@ -20,10 +20,10 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Events<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="<c:url value='/main/event/create'/>">Create an Event</a></li>
-                  <li><a href="<c:url value="/listForOrganizer/"/>">Manage my Events</a></li>
+                  <li><a href="<c:url value="main/listForOrganizer/"/>">Manage my Events</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">Subscribe to an Event</a></li>
-                  <li><a href="<c:url value="/listForParticipant/"/>">Manage subscribed Events</a></li>
+                  <li><a href="main/event/find">Find an Event</a></li>
+                  <li><a href="<c:url value="/main/listForParticipant/"/>">Manage subscribed Events</a></li>
                 </ul>
               </li>
               <li ><a href="#">My Tickets</a></li>

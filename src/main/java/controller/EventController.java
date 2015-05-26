@@ -33,8 +33,21 @@ public class EventController {
 		return model; 
 	}
 	
+	@RequestMapping("event/subscribe/{id}")
+	public void subscribeToAnEvent(@PathVariable String id){
+		ModelAndView model = new ModelAndView("event/singleEvent");		
+		
+		String username = 
+				SecurityContextHolder.getContext().getAuthentication().getName();
+		Event event = eventManager.getEventById(id);
+		
+		model.addObject("event", event);
+		model.addObject("username", username);
+		//return model; 
+	}
+	
 	@RequestMapping("event/create")
-	public ModelAndView getSingleEventPage(){
+	public ModelAndView createAnEvent(){
 		ModelAndView model = new ModelAndView("event/createEvent");		
 		
 		String username = 
