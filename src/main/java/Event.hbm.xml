@@ -35,6 +35,9 @@
 				<property name="backgroundFile" type="java.lang.String">
 			<column name="BACKGROUNDFILE" />
 		</property>
+				<property name="timeOfEvent" type="java.lang.String">
+			<column name="TIMEOFEVENT" />
+		</property>
 		<set name="tickets" table="TICKETS" inverse="true" lazy="false">
 			<key>
 				<column name="eventId" not-null="true" />

@@ -16,9 +16,8 @@ public class User {
 	private String name;
 	private String surname;
 	private String email;
-	
-	
-	private List<Event> events   = new ArrayList<Event>(0);
+
+	private List<Event> events = new ArrayList<Event>(0);
 
 	public void setLogin(final String login) {
 		this.login = login;
@@ -61,8 +60,8 @@ public class User {
 	}
 
 	public String toString() {
-		return "p: " + password + " " + "l: " + login + " " + "n: " + name + " " + "s: " + surname + " " + "e: "
-				+ email;
+		return "p: " + password + " " + "l: " + login + " " + "n: " + name
+				+ " " + "s: " + surname + " " + "e: " + email;
 	}
 
 	public List<Event> getEvents() {

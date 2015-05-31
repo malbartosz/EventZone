@@ -1,8 +1,11 @@
 package model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 
 /**
  * @author Zu
@@ -12,10 +15,9 @@ public class Participant {
 	
 	public Participant(){};
 	
-	public Participant(int id, int eventId, String personId, int ifPaid,
+	public Participant(int eventId, String personId, int ifPaid,
 			int ticketId, Ticket ticket, Event event, User person) {
 		super();
-		this.id = id;
 		this.eventId = eventId;
 		this.personId = personId;
 		this.ifPaid = ifPaid;
@@ -24,7 +26,9 @@ public class Participant {
 		this.event = event;
 		this.person = person;
 	}
-
+	 @Id
+	   @SequenceGenerator(name = "EVENTZONE.PARTICIPANTS_SEQ1", sequenceName = "EVENTZONE.PARTICIPANTS_SEQ1", allocationSize = 1)
+	   @GeneratedValue(generator = "EVENTZONE.PARTICIPANTS_SEQ1", strategy = GenerationType.SEQUENCE)
 	private int id;
 	private int eventId;
 	private String personId;

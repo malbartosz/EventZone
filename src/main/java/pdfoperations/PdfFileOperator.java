@@ -61,8 +61,10 @@ public class PdfFileOperator {
 			List<ParticipantForOrganizer> participants, Event event)
 			throws MalformedURLException, IOException {
 		Document document = new Document();
-		String fileName = String.valueOf( "src\\main\\webapp\\resources\\files\\lists\\" + event.getId()) + event.getName()
-				+ ".pdf";
+		String fileName = String
+				.valueOf("src\\main\\webapp\\resources\\files\\lists\\"
+						+ event.getId())
+				+ event.getName() + ".pdf";
 		try {
 
 			PdfWriter writer = PdfWriter.getInstance(document,
@@ -173,8 +175,8 @@ public class PdfFileOperator {
 
 	public String createTicket(EventInfoForParticipant eventInfo, String name,
 			String surname) {
-		String fileName = "src\\main\\webapp\\resources\\files\\tickets\\" + eventInfo.getEvent().getName() + name + surname
-				+ ".pdf";
+		String fileName = "src\\main\\webapp\\resources\\files\\tickets\\"
+				+ eventInfo.getEvent().getName() + name + surname + ".pdf";
 		Document document = new Document();
 		try {
 			PdfWriter writer = PdfWriter.getInstance(document,
@@ -219,7 +221,8 @@ public class PdfFileOperator {
 			eventPlaceAndTime.addElement(new Phrase(eventInfo.getEvent()
 					.getPlace()
 					+ " "
-					+ String.valueOf(eventInfo.getEvent().getDateOfEvent()),
+					+ String.valueOf(eventInfo.getEvent().getDateOfEvent())
+					+ String.valueOf(eventInfo.getEvent().getTimeOfEvent()),
 					bigFont));
 			eventPlaceAndTime.setPaddingLeft(10);
 			eventPlaceAndTime.setPaddingBottom(10);
@@ -267,32 +270,32 @@ public class PdfFileOperator {
 		}
 		return fileName;
 	}
-	
+
 	public void modifyExistingFile() {
-		 try
-		  {
-		    //Read file using PdfReader
-		    PdfReader pdfReader = new PdfReader("HelloWorld.pdf");
-		 
-		    //Modify file using PdfReader
-		    PdfStamper pdfStamper = new PdfStamper(pdfReader, new FileOutputStream("HelloWorld-modified.pdf"));
-		 
-		    Image image = Image.getInstance("src\\main\\webapp\\resources\\logo.png");
-		    image.scaleAbsolute(100, 50);
-		    image.setAbsolutePosition(100f, 700f);
-		 
-		    for(int i=1; i<= pdfReader.getNumberOfPages(); i++)
-		    {
-		        PdfContentByte content = pdfStamper.getUnderContent(i);
-		        content.addImage(image);
-		    }
-		 
-		    pdfStamper.close();
-		 
-		  } catch (IOException e) {
-		    e.printStackTrace();
-		  } catch (DocumentException e) {
-		    e.printStackTrace();
-		  }
+		try {
+			// Read file using PdfReader
+			PdfReader pdfReader = new PdfReader("HelloWorld.pdf");
+
+			// Modify file using PdfReader
+			PdfStamper pdfStamper = new PdfStamper(pdfReader,
+					new FileOutputStream("HelloWorld-modified.pdf"));
+
+			Image image = Image
+					.getInstance("src\\main\\webapp\\resources\\logo.png");
+			image.scaleAbsolute(100, 50);
+			image.setAbsolutePosition(100f, 700f);
+
+			for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
+				PdfContentByte content = pdfStamper.getUnderContent(i);
+				content.addImage(image);
+			}
+
+			pdfStamper.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		}
 	}
 }

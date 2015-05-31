@@ -12,17 +12,17 @@ public class EventInfoForParticipant {
 	private int id;
 	
 	public EventInfoForParticipant(float cost, String name, Date dateOfEvent, String subtitle,
-			String organizer, String place, String description, String picture, String backgroudFile) {
+			String organizer, String place, String description, String picture, String backgroudFile, String timeOfEvent) {
 		this.cost = cost;
 		this.event = new Event(name, dateOfEvent, subtitle, organizer, place, description,
-				picture, backgroudFile);
+				picture, backgroudFile, timeOfEvent);
 	}
 	
 	public EventInfoForParticipant(float cost, int id, String name, Date dateOfEvent, String subtitle,
-			String organizer, String place, String description, String picture, String backgroudFile) {
+			String organizer, String place, String description, String picture, String backgroudFile, String timeOfEvent) {
 		this.cost = cost;
 		this.event = new Event(id, name, dateOfEvent, subtitle, organizer, place, description,
-				picture, backgroudFile);
+				picture, backgroudFile, timeOfEvent);
 	}
 
 	public EventInfoForParticipant(float cost, Event event) {
@@ -35,6 +35,7 @@ public class EventInfoForParticipant {
 		this.event.setPlace(event.getPlace());
 		this.event.setPicture(event.getPicture());
 		this.event.setBackgroundFile(event.getBackgroundFile());
+		this.event.setTimeOfEvent(event.getTimeOfEvent());
 		
 	}
 

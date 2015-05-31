@@ -14,6 +14,7 @@ import util.HibernateUtil;
 
 public class ParticipantManager {
 
+	@SuppressWarnings("unchecked")
 	public List<ParticipantForOrganizer> getAllParticipantsByEventId(int eventId) {
 		List<ParticipantForOrganizer> participants = null;
 
@@ -64,6 +65,7 @@ public class ParticipantManager {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<EventInfoForParticipant> getEventsForParticipant(String personId) {
 		List<EventInfoForParticipant> events = new ArrayList<EventInfoForParticipant>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

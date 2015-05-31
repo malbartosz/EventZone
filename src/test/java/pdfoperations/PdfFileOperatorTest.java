@@ -22,22 +22,22 @@ public class PdfFileOperatorTest extends TestCase {
 	}
 
 	public void testCreatingListOfParticipants() throws ParseException, MalformedURLException, IOException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		Date date = dateFormat.parse("2015-08-19 06:11:03.0");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = dateFormat.parse("2015-08-19");
 		Event event = new Event("Sting concert", date,
 				"Nice event", "Sting management", "Wroclaw",
-				"You have to be there", "C:\\picture.jpg", null);
+				"You have to be there", "C:\\picture.jpg", null, null);
 		PdfFileOperator pdfOperator = new PdfFileOperator();
 		pdfOperator.createListOfParticipants(createListOfParticipants(), event);
 	}
 
 	
 	public void testCreatingTicket() throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
-		Date date = dateFormat.parse("2015-08-19 06:11:03.0");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = dateFormat.parse("2015-08-19");
 		Event event = new Event("Sting concert", date,
 				"Nice event", "Sting management", "Wroclaw",
-				"You have to be there", "C:\\picture.jpg", null);
+				"You have to be there", "C:\\picture.jpg", null, null);
 		EventInfoForParticipant eventInfo = new EventInfoForParticipant(170, event);
 		PdfFileOperator pdfOperator = new PdfFileOperator();
 		pdfOperator.createTicket(eventInfo, "Joanna", "Borowiak");
