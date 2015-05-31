@@ -1,5 +1,13 @@
+DROP TABLE PARTICIPANTS;
+DROP TABLE TICKETS;
+DROP TABLE EVENTS;
+DROP TABLE USERS;
+DROP SEQUENCE "EVENTZONE"."EVENTS_SEQ";
+DROP SEQUENCE "EVENTZONE"."PARTICIPANTS_SEQ1";
+DROP SEQUENCE "EVENTZONE"."TICKETS_SEQ1";
+
 --------------------------------------------------------
---  File created - wtorek-maj-19-2015   
+--  File created - niedziela-maj-31-2015   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence DEMO_CUST_SEQ
@@ -30,7 +38,17 @@
 --  DDL for Sequence EVENTS_SEQ
 --------------------------------------------------------
 
-   CREATE SEQUENCE  "EVENTZONE"."EVENTS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 21 CACHE 20 NOORDER  NOCYCLE ;
+   CREATE SEQUENCE  "EVENTZONE"."EVENTS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 40 ORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence PARTICIPANTS_SEQ1
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EVENTZONE"."PARTICIPANTS_SEQ1"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 40 ORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence TICKETS_SEQ1
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "EVENTZONE"."TICKETS_SEQ1"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 40 ORDER  NOCYCLE ;
 --------------------------------------------------------
 --  DDL for Table EVENTS
 --------------------------------------------------------
@@ -45,7 +63,8 @@
 	"DESCRIPTION" VARCHAR2(1000 BYTE), 
 	"PICTURE" VARCHAR2(200 BYTE), 
 	"SUBTITLE" VARCHAR2(60 BYTE), 
-	"BACKGROUNDFILE" VARCHAR2(200 BYTE)
+	"BACKGROUNDFILE" VARCHAR2(200 BYTE), 
+	"TIMEOFEVENT" VARCHAR2(20 BYTE)
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
@@ -140,7 +159,6 @@
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "EVENTZONE"."TICKETS" MODIFY ("ID" NOT NULL ENABLE);
   ALTER TABLE "EVENTZONE"."TICKETS" MODIFY ("EVENTID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table PARTICIPANTS
@@ -151,7 +169,6 @@
   STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
   PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS"  ENABLE;
-  ALTER TABLE "EVENTZONE"."PARTICIPANTS" MODIFY ("ID" NOT NULL ENABLE);
   ALTER TABLE "EVENTZONE"."PARTICIPANTS" MODIFY ("TICKETID" NOT NULL ENABLE);
   ALTER TABLE "EVENTZONE"."PARTICIPANTS" MODIFY ("IFPAID" NOT NULL ENABLE);
   ALTER TABLE "EVENTZONE"."PARTICIPANTS" MODIFY ("PERSONID" NOT NULL ENABLE);
@@ -168,7 +185,6 @@
   ALTER TABLE "EVENTZONE"."EVENTS" MODIFY ("DATEOFCREATION" NOT NULL ENABLE);
   ALTER TABLE "EVENTZONE"."EVENTS" MODIFY ("ORGANIZER" NOT NULL ENABLE);
   ALTER TABLE "EVENTZONE"."EVENTS" MODIFY ("NAME" NOT NULL ENABLE);
-  ALTER TABLE "EVENTZONE"."EVENTS" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table USERS
 --------------------------------------------------------
@@ -190,11 +206,9 @@
 --  Ref Constraints for Table PARTICIPANTS
 --------------------------------------------------------
 
-  ALTER TABLE "EVENTZONE"."PARTICIPANTS" ADD CONSTRAINT "PARTICIPANTS_FK1" FOREIGN KEY ("PERSONID")
-	  REFERENCES "EVENTZONE"."USERS" ("LOGIN") ENABLE;
-  ALTER TABLE "EVENTZONE"."PARTICIPANTS" ADD CONSTRAINT "PARTICIPANTS_FK2" FOREIGN KEY ("EVENTID")
+  ALTER TABLE "EVENTZONE"."PARTICIPANTS" ADD CONSTRAINT "PARTICIPANTS_FK1" FOREIGN KEY ("EVENTID")
 	  REFERENCES "EVENTZONE"."EVENTS" ("ID") ENABLE;
-  ALTER TABLE "EVENTZONE"."PARTICIPANTS" ADD CONSTRAINT "PARTICIPANTS_FK3" FOREIGN KEY ("TICKETID")
+  ALTER TABLE "EVENTZONE"."PARTICIPANTS" ADD CONSTRAINT "PARTICIPANTS_FK2" FOREIGN KEY ("TICKETID")
 	  REFERENCES "EVENTZONE"."TICKETS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table TICKETS
@@ -203,10 +217,10 @@
   ALTER TABLE "EVENTZONE"."TICKETS" ADD CONSTRAINT "TICKETS_FK1" FOREIGN KEY ("EVENTID")
 	  REFERENCES "EVENTZONE"."EVENTS" ("ID") ENABLE;
 --------------------------------------------------------
---  DDL for Trigger EVENTS_TRG
+--  DDL for Trigger EVENTS_TRG1
 --------------------------------------------------------
 
-  CREATE OR REPLACE TRIGGER "EVENTZONE"."EVENTS_TRG" 
+  CREATE OR REPLACE TRIGGER "EVENTZONE"."EVENTS_TRG1" 
 BEFORE INSERT ON EVENTS 
 FOR EACH ROW 
 BEGIN
@@ -218,7 +232,41 @@ BEGIN
   END COLUMN_SEQUENCES;
 END;
 /
-ALTER TRIGGER "EVENTZONE"."EVENTS_TRG" ENABLE;
+ALTER TRIGGER "EVENTZONE"."EVENTS_TRG1" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger PARTICIPANTS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "EVENTZONE"."PARTICIPANTS_TRG" 
+BEFORE INSERT ON PARTICIPANTS 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT PARTICIPANTS_SEQ1.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "EVENTZONE"."PARTICIPANTS_TRG" ENABLE;
+--------------------------------------------------------
+--  DDL for Trigger TICKETS_TRG
+--------------------------------------------------------
+
+  CREATE OR REPLACE TRIGGER "EVENTZONE"."TICKETS_TRG" 
+BEFORE INSERT ON TICKETS 
+FOR EACH ROW 
+BEGIN
+  <<COLUMN_SEQUENCES>>
+  BEGIN
+    IF INSERTING AND :NEW.ID IS NULL THEN
+      SELECT TICKETS_SEQ1.NEXTVAL INTO :NEW.ID FROM SYS.DUAL;
+    END IF;
+  END COLUMN_SEQUENCES;
+END;
+/
+ALTER TRIGGER "EVENTZONE"."TICKETS_TRG" ENABLE;
 --------------------------------------------------------
 --  DDL for Function CUSTOM_AUTH
 --------------------------------------------------------
@@ -234,7 +282,7 @@ begin
 -- First, check to see if the user is in the user table
 select count(*) into l_count from demo_users where user_name = p_username;
 if l_count > 0 then
-  -- First, we fetch the stored hashed password & expire date
+  -- First, we fetch the stored hashed password  date
   select password, expires_on into l_stored_password, l_expires_on
    from demo_users where user_name = p_username;
 
@@ -286,3 +334,30 @@ return l_password;
 end;
 
 /
+
+--------------------------------------------------------
+--  File created - niedziela-maj-31-2015   
+--------------------------------------------------------
+REM INSERTING into EVENTZONE.USERS
+SET DEFINE OFF;
+Insert into EVENTZONE.USERS (LOGIN,PASSWORD,NAME,SURNAME,EMAIL) values ('zuzanna','password','name','surname','email@email');
+Insert into EVENTZONE.USERS (LOGIN,PASSWORD,NAME,SURNAME,EMAIL) values ('bartek','bartek','bartek','bartek','bartek@bartek');
+Insert into EVENTZONE.USERS (LOGIN,PASSWORD,NAME,SURNAME,EMAIL) values ('user','password','user','user','user@user');
+REM INSERTING into EVENTZONE.EVENTS
+SET DEFINE OFF;
+Insert into EVENTZONE.EVENTS (ID,NAME,ORGANIZER,PLACE,DATEOFEVENT,DATEOFCREATION,DESCRIPTION,PICTURE,SUBTITLE,BACKGROUNDFILE,TIMEOFEVENT) values ('1','sting','zuzanna','wroclaw',to_date('15/09/11','RR/MM/DD'),to_date('15/04/08','RR/MM/DD'),'it will be awesome',null,null,null,null);
+Insert into EVENTZONE.EVENTS (ID,NAME,ORGANIZER,PLACE,DATEOFEVENT,DATEOFCREATION,DESCRIPTION,PICTURE,SUBTITLE,BACKGROUNDFILE,TIMEOFEVENT) values ('2','juwenalia','bartek','krakow',to_date('15/05/14','RR/MM/DD'),to_date('15/04/23','RR/MM/DD'),'have fun',null,null,null,null);
+Insert into EVENTZONE.EVENTS (ID,NAME,ORGANIZER,PLACE,DATEOFEVENT,DATEOFCREATION,DESCRIPTION,PICTURE,SUBTITLE,BACKGROUNDFILE,TIMEOFEVENT) values ('3','festiwal','user','warsaw',to_date('15/04/10','RR/MM/DD'),to_date('15/04/01','RR/MM/DD'),'sss',null,null,null,null);
+REM INSERTING into EVENTZONE.TICKETS
+SET DEFINE OFF;
+Insert into EVENTZONE.TICKETS (EVENTID,QUANTITY,COST,ID) values ('1','20','150','5');
+Insert into EVENTZONE.TICKETS (EVENTID,QUANTITY,COST,ID) values ('2','10','0','6');
+Insert into EVENTZONE.TICKETS (EVENTID,QUANTITY,COST,ID) values ('1','20','150','7');
+Insert into EVENTZONE.TICKETS (EVENTID,QUANTITY,COST,ID) values ('2','10','0','8');
+REM INSERTING into EVENTZONE.PARTICIPANTS
+SET DEFINE OFF;
+Insert into EVENTZONE.PARTICIPANTS (EVENTID,PERSONID,IFPAID,TICKETID,ID) values ('1','zuzanna','1','5','10');
+Insert into EVENTZONE.PARTICIPANTS (EVENTID,PERSONID,IFPAID,TICKETID,ID) values ('1','bartek','1','5','11');
+Insert into EVENTZONE.PARTICIPANTS (EVENTID,PERSONID,IFPAID,TICKETID,ID) values ('2','zuzanna','1','6','12');
+
+
