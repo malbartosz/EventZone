@@ -93,9 +93,9 @@ public class EventController {
 		return model; 
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "event/createEvent", method = RequestMethod.POST)
 	public ModelAndView createEventForm(@ModelAttribute("eventForm") final EventFormObject event) {
-
+		System.out.println("in create event!!");
 		ModelAndView model = null;
 		EventFormObject newEvent = event;
 		EventFormObjectManager eventFormManager = new EventFormObjectManager();
