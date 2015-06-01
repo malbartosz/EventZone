@@ -23,7 +23,7 @@ public class PdfFileOperatorTest extends TestCase {
 
 	public void testCreatingListOfParticipants() throws ParseException, MalformedURLException, IOException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = dateFormat.parse("2015-08-19");
+		String date = dateFormat.parse("2015-08-19").toString();
 		Event event = new Event("Sting concert", date,
 				"Nice event", "Sting management", "Wroclaw",
 				"You have to be there", "C:\\picture.jpg", null, null);
@@ -34,7 +34,7 @@ public class PdfFileOperatorTest extends TestCase {
 	
 	public void testCreatingTicket() throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = dateFormat.parse("2015-08-19");
+		String date = dateFormat.parse("2015-08-19").toString();
 		Event event = new Event("Sting concert", date,
 				"Nice event", "Sting management", "Wroclaw",
 				"You have to be there", "C:\\picture.jpg", null, null);

@@ -1,6 +1,5 @@
 package model;
 
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +18,7 @@ public class Event {
 	public Event() {
 	};
 
-	public Event(String name, Date dateOfEvent, String subtitle,
+	public Event(String name, String dateOfEvent, String subtitle,
 			String organizer, String place, String description, String picture,
 			String backgroundFile, String timeOfEvent) {
 		this.name = name;
@@ -33,7 +32,7 @@ public class Event {
 		this.timeOfEvent = timeOfEvent;
 	}
 
-	public Event(int id, String name, Date dateOfEvent, String subtitle,
+	public Event(int id, String name, String dateOfEvent, String subtitle,
 			String organizer, String place, String description, String picture,
 			String backgroundFile, String timeOfEvent) {
 		this.id = id;
@@ -49,7 +48,7 @@ public class Event {
 	}
 
 	public Event(int id, String name, String subtitle, String organizer,
-			String place, Date dateOfEvent, Date dateOfCreation,
+			String place, String dateOfEvent, String dateOfCreation,
 			String description, String picture, String backgroundFile,
 			Set<Ticket> tickets, Set<Participant> participants,
 			String timeOfEvent) {
@@ -77,8 +76,8 @@ public class Event {
 	private String subtitle;
 	private String organizer;
 	private String place;
-	private Date dateOfEvent;
-	private Date dateOfCreation;
+	private String dateOfEvent;
+	private String dateOfCreation;
 	private String description;
 	private String picture;
 	private String backgroundFile;
@@ -95,19 +94,19 @@ public class Event {
 		this.description = description;
 	}
 
-	public Date getDateOfCreation() {
+	public String getDateOfCreation() {
 		return dateOfCreation;
 	}
 
-	public void setDateOfCreation(Date dateOfCreation) {
+	public void setDateOfCreation(String dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
 	}
 
-	public Date getDateOfEvent() {
+	public String getDateOfEvent() {
 		return dateOfEvent;
 	}
 
-	public void setDateOfEvent(Date dateOfEvent) {
+	public void setDateOfEvent(String dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
 	}
 

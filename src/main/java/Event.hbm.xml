@@ -20,10 +20,10 @@
 		<property name="place" type="java.lang.String">
 			<column name="PLACE" />
 		</property>
-		<property name="dateOfEvent" type="java.sql.Date">
+		<property name="dateOfEvent" type="java.lang.String">
 			<column name="DATEOFEVENT" />
 		</property>
-		<property name="dateOfCreation" type="java.sql.Date">
+		<property name="dateOfCreation" type="java.lang.String">
 			<column name="DATEOFCREATION" />
 		</property>
 		<property name="description" type="java.lang.String">

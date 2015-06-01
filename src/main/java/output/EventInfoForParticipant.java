@@ -11,14 +11,14 @@ public class EventInfoForParticipant {
 	private Event event;
 	private int id;
 	
-	public EventInfoForParticipant(float cost, String name, Date dateOfEvent, String subtitle,
+	public EventInfoForParticipant(float cost, String name, String dateOfEvent, String subtitle,
 			String organizer, String place, String description, String picture, String backgroudFile, String timeOfEvent) {
 		this.cost = cost;
 		this.event = new Event(name, dateOfEvent, subtitle, organizer, place, description,
 				picture, backgroudFile, timeOfEvent);
 	}
 	
-	public EventInfoForParticipant(float cost, int id, String name, Date dateOfEvent, String subtitle,
+	public EventInfoForParticipant(float cost, int id, String name, String dateOfEvent, String subtitle,
 			String organizer, String place, String description, String picture, String backgroudFile, String timeOfEvent) {
 		this.cost = cost;
 		this.event = new Event(id, name, dateOfEvent, subtitle, organizer, place, description,
