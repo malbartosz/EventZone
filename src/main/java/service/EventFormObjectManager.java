@@ -11,12 +11,14 @@ public class EventFormObjectManager {
 	private EventManager eventManager;
 	private TicketManager ticketManager;
 
-	public void saveEventFormObject(EventFormObject eventFormObject)
+	public int saveEventFormObject(EventFormObject eventFormObject)
 			throws CreateEventException, WrongPictureFileExtension, WrongBackgroundFileExtension {
 		this.eventManager = new EventManager();
 		this.ticketManager = new TicketManager();
 		String picturePath = checkPictureFile(eventFormObject);
 		String backgroundPath = checkBackgroundFile(eventFormObject);
+		eventFormObject.setPictureNewPath(picturePath);
+		eventFormObject.setBackgroundNewPath(backgroundPath);
 		Event event = eventFormObject.getEvent();
 		event.setPicture(picturePath);
 		event.setBackgroundFile(backgroundPath);
@@ -42,11 +44,12 @@ public class EventFormObjectManager {
 					eventFormObject.getTicket3Cost());
 			ticketManager.saveTicket(ticket3);
 		}
+		return maxId;
 	}
 
 	private String checkPictureFile(EventFormObject eventFormObject)
 			throws WrongPictureFileExtension {
-		String picturePath = eventFormObject.getPicture();
+		String picturePath = eventFormObject.getPicture(); //.getOriginalFilename();
 		if (picturePath.length() > 0) {
 			String pictureExtension = picturePath.substring(
 					picturePath.lastIndexOf('.') + 1, picturePath.length());
@@ -65,7 +68,7 @@ public class EventFormObjectManager {
 	
 	private String checkBackgroundFile(EventFormObject eventFormObject)
 			throws WrongBackgroundFileExtension {
-		String backgroundPath = eventFormObject.getBackgroundFile();
+		String backgroundPath = eventFormObject.getBackgroundFile(); //.getOriginalFilename();
 		if (backgroundPath.length() > 0) {
 			String backgroundExtension = backgroundPath.substring(
 					backgroundPath.lastIndexOf('.') + 1, backgroundPath.length());

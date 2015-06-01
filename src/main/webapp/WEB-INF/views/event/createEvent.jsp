@@ -73,7 +73,7 @@
 	<div class="line_divs">
 		<div class="div_block1">
 			<form:form modelAttribute="eventForm" action="createEvent"
-				method="POST">
+				method="POST" >
 				<div class="form-group">
 					<form:label path="name" for="name" class="lead control-label">Event name</form:label>
 					<form:input path="name" type="text" class="form-control" id="name"
@@ -118,39 +118,39 @@
 				<div class="lead control-label">You can choose max three types of tickets</div>
 				<div class="form-group">
 					<form:label path="ticket1Quantity" for="ticket1Quantity"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Ticket 1: Quantity</form:label>
 					<form:input path="ticket1Quantity" type="text" class="form-control"
 						id="ticket1Quantity" name="ticket1Quantity"></form:input>
 					<span class="help-block"></span>
 
 					<form:label path="ticket1Cost" for="ticket1Cost"
-						class="lead control-label">Cost</form:label>
+						class="lead control-label">Ticket 1: Cost</form:label>
 					<form:input path="ticket1Cost" type="text" class="form-control"
 						id="ticket1Cost" name="ticket1Cost"></form:input>
 					<span class="help-block"></span>
 				</div>
 				<div class="form-group">
 					<form:label path="ticket2Quantity" for="ticket2Quantity"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Ticket 2: Quantity</form:label>
 					<form:input path="ticket2Quantity" type="text" class="form-control"
 						id="ticket2Quantity" name="ticket2Quantity"></form:input>
 					<span class="help-block"></span>
 
 					<form:label path="ticket2Cost" for="ticket2Cost"
-						class="lead control-label">Cost</form:label>
+						class="lead control-label">Ticket 2: Cost</form:label>
 					<form:input path="ticket2Cost" type="text" class="form-control"
 						id="ticket2Cost" name="ticket2Cost"></form:input>
 					<span class="help-block"></span>
 				</div>
 				<div class="form-group">
 					<form:label path="ticket3Quantity" for="ticket3Quantity"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Ticket 3: Quantity</form:label>
 					<form:input path="ticket3Quantity" type="text" class="form-control"
 						id="ticket3Quantity" name="ticket3Quantity"></form:input>
 					<span class="help-block"></span>
 
 					<form:label path="ticket3Cost" for="ticket3Cost"
-						class="lead control-label">Cost</form:label>
+						class="lead control-label">Ticket 3: Cost</form:label>
 					<form:input path="ticket3Cost" type="text" class="form-control"
 						id="ticket3Cost" name="ticket3Cost"></form:input>
 					<span class="help-block"></span>
@@ -160,7 +160,7 @@
 					<form:input path="picture" type="file" id="picture" name="picture"></form:input>
 					<span class="help-block"></span>
 				</div>
-				<div class="form-group">
+<div class="form-group">
 					<form:label path="backgroundFile" for="backgroundFile"
 						class="lead control-label">Background for participant list</form:label>
 					<form:input path="backgroundFile" type="file" id="backgroundFile"

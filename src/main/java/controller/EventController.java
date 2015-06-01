@@ -1,8 +1,15 @@
 package controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import model.Event;
 import model.Participant;
@@ -17,6 +24,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -120,24 +129,50 @@ public class EventController {
 
 		newEvent.setDateOfCreation(String.valueOf(dateFormat.format(date)));
 		EventFormObjectManager eventFormManager = new EventFormObjectManager();
+		int id;
 		try {
-			eventFormManager.saveEventFormObject(newEvent);
+			id = eventFormManager.saveEventFormObject(newEvent);
 		} catch (CreateEventException e) {
-			// model = new
-			// ModelAndView("redirect:/main/event/create?fail=true");
-			// redir.addFlashAttribute("createEventFailureMsg", e.getMessage());
-			// System.out.println("Ex msg: " + e.getMessage());
+			model.addObject("error", e);
 			return model;
 		} catch (WrongPictureFileExtension e) {
-			// TODO Auto-generated catch block
+			model.addObject("error", e);
 			return model;
 		} catch (WrongBackgroundFileExtension e) {
+			model.addObject("error", e);
 			return model;
 		}
-		// model = new ModelAndView("redirect:/listForOrganizer/");
-		// redir.addFlashAttribute("successMsg",
-		// "Your event has been created!");
+//		try {
+//			this.upload(newEvent.getPicture(), newEvent.getPictureNewPath());
+//		} catch (Exception e1) {
+//			model.addObject("error", e1);
+//			return model;
+//		}
+//		try {
+//			this.upload(newEvent.getBackgroundFile(), newEvent.getBackgroundNewPath());
+//		} catch (Exception e) {
+//			model.addObject("error", e);
+//			return model;
+//		}
+		model = new ModelAndView("redirect:/main/event/" + String.valueOf(id));
+		
 		return model;
 
 	}
+	
+//    /**
+//     * upload
+//     */
+//    public void upload( MultipartFile file, String name) throws Exception {
+//    	 if (!file.isEmpty()) {
+//            
+//                 byte[] bytes = file.getBytes();
+//                 BufferedOutputStream stream =
+//                         new BufferedOutputStream(new FileOutputStream(new File(name)));
+//                 stream.write(bytes);
+//                 stream.close();
+//         } else {
+//             throw new Exception( "You failed to upload " + name + " because the file was empty.");
+//         }
+//    }
 }
