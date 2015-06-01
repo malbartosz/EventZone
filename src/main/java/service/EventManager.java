@@ -90,6 +90,30 @@ public class EventManager {
 
         return events;
     }
+    
+    @SuppressWarnings("unchecked")
+	public int getMaxEventId()
+    {
+    	int maxId;
+
+        Session session = HibernateUtil.getSessionFactory()
+                .getCurrentSession();
+        session.beginTransaction();
+        try
+        {
+        	maxId = (int) session
+					.createQuery(
+							"select max(id) from Event ").uniqueResult();
+			session.getTransaction().commit();
+        }
+        catch (HibernateException e)
+        {
+            session.getTransaction().rollback();
+            throw e;
+        }
+
+        return maxId;
+    }
 
     public void saveEvent(Event event)
     {

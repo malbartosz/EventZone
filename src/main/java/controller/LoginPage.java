@@ -45,14 +45,17 @@ public class LoginPage {
 		return model;
 	}
 
-	@RequestMapping(value = "listForOrganizer/", method = RequestMethod.GET)
-	public String listEventsForOrganizer(final ModelMap model,
-			final Principal principal) {
-		String username = principal.getName();
+	@RequestMapping(value = "listForOrganizer", method = RequestMethod.GET)
+	public ModelAndView listEventsForOrganizer() {
+		ModelAndView model = new ModelAndView("myEvents");
+
+		String username = SecurityContextHolder.getContext()
+				.getAuthentication().getName();
 		List<Event> listEventsForOrganizer = this.eventManager
 				.getAllEventsByOrganizer(username);
-		model.addAttribute("listEventsForOrganizer", listEventsForOrganizer);
-		return "main_page";
+		model.addObject("username", username);
+		model.addObject("listEventsForOrganizer", listEventsForOrganizer);
+		return model;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)

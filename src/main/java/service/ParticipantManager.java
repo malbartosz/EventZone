@@ -15,7 +15,9 @@ import util.HibernateUtil;
 
 public class ParticipantManager {
 
-	
+
+	@SuppressWarnings("unchecked")
+
 	public List<ParticipantForOrganizer> getAllParticipantsByEventId(int eventId) {
 		List<ParticipantForOrganizer> participants = null;
 
@@ -68,6 +70,7 @@ public class ParticipantManager {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<EventInfoForParticipant> getEventsForParticipant(String personId) {
 		List<EventInfoForParticipant> events = new ArrayList<EventInfoForParticipant>();
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -75,7 +78,7 @@ public class ParticipantManager {
 		try {
 			events = (List<EventInfoForParticipant>) session
 					.createQuery(
-							"select new output.EventInfoForParticipant(t.cost, e.id, e.name, e.dateOfEvent, e.subtitle, e.organizer, e.place, e.description, e.picture, e.backgroundFile)" 
+							"select new output.EventInfoForParticipant(t.cost, e.name, e.dateOfEvent, e.subtitle, e.organizer, e.place, e.description, e.picture, e.backgroundFile, e.timeOfEvent)" 
 					+ " from Participant p join p.ticket t join p.event e"
 									+ " where personId = ?")
 					.setString(0, personId).list();
@@ -90,7 +93,7 @@ public class ParticipantManager {
 	}
 
 	public boolean checkIfSubscribed(String username, String id) {
-		boolean userSubscribed = false;
+		//boolean userSubscribed = false;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		try {

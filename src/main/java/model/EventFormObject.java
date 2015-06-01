@@ -1,27 +1,12 @@
 package model;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-
-/**
- * @author Zu
- *
- */
-
-public class Event {
-
-	public Event() {
+public class EventFormObject {
+	public EventFormObject() {
 	};
-
-	public Event(String name, Date dateOfEvent, String subtitle,
-			String organizer, String place, String description, String picture,
-			String backgroundFile, String timeOfEvent) {
+	
+	public EventFormObject(String name, Date dateOfEvent, String subtitle, String organizer, String place, String description, String picture,  String backgroundFile, String timeOfEvent) {
 		this.name = name;
 		this.subtitle = subtitle;
 		this.organizer = organizer;
@@ -32,27 +17,10 @@ public class Event {
 		this.backgroundFile = backgroundFile;
 		this.timeOfEvent = timeOfEvent;
 	}
-
-	public Event(int id, String name, Date dateOfEvent, String subtitle,
-			String organizer, String place, String description, String picture,
-			String backgroundFile, String timeOfEvent) {
-		this.id = id;
-		this.name = name;
-		this.subtitle = subtitle;
-		this.organizer = organizer;
-		this.dateOfEvent = dateOfEvent;
-		this.place = place;
-		this.description = description;
-		this.picture = picture;
-		this.backgroundFile = backgroundFile;
-		this.timeOfEvent = timeOfEvent;
-	}
-
-	public Event(int id, String name, String subtitle, String organizer,
+	
+	public EventFormObject(int id, String name, String subtitle, String organizer,
 			String place, Date dateOfEvent, Date dateOfCreation,
-			String description, String picture, String backgroundFile,
-			Set<Ticket> tickets, Set<Participant> participants,
-			String timeOfEvent) {
+			String description, String picture, String backgroundFile, String timeOfEvent) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -64,14 +32,9 @@ public class Event {
 		this.description = description;
 		this.picture = picture;
 		this.backgroundFile = backgroundFile;
-		this.tickets = tickets;
-		this.participants = participants;
 		this.timeOfEvent = timeOfEvent;
 	}
 
-	@Id
-	@SequenceGenerator(name = "EVENTZONE.EVENTS_SEQ", sequenceName = "EVENTZONE.EVENTS_SEQ", allocationSize = 1)
-	@GeneratedValue(generator = "EVENTZONE.EVENTS_SEQ", strategy = GenerationType.SEQUENCE)
 	private int id;
 	private String name;
 	private String subtitle;
@@ -83,10 +46,17 @@ public class Event {
 	private String picture;
 	private String backgroundFile;
 	private String timeOfEvent;
-
-	private Set<Ticket> tickets = new HashSet<Ticket>(0);
-	private Set<Participant> participants = new HashSet<Participant>(0);
-
+	private int ticket1Quantity;
+	private float ticket1Cost;
+	private int ticket2Quantity;
+	private float ticket2Cost;
+	private int ticket3Quantity;
+	private float ticket3Cost;
+	
+	public Event getEvent() {
+		return new Event(name, dateOfEvent, subtitle, organizer, place, description, picture, backgroundFile, timeOfEvent);
+	}
+		
 	public String getDescription() {
 		return description;
 	}
@@ -159,28 +129,60 @@ public class Event {
 		this.subtitle = subtitle;
 	}
 
-	public Set<Participant> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(Set<Participant> participants) {
-		this.participants = participants;
-	}
-
-	public Set<Ticket> getTickets() {
-		return tickets;
-	}
-
-	public void setTickets(Set<Ticket> tickets) {
-		this.tickets = tickets;
-	}
-
 	public String getBackgroundFile() {
 		return backgroundFile;
 	}
 
 	public void setBackgroundFile(String backgroundFile) {
 		this.backgroundFile = backgroundFile;
+	}
+
+	public int getTicket1Quantity() {
+		return ticket1Quantity;
+	}
+
+	public void setTicket1Quantity(int ticket1Quantity) {
+		this.ticket1Quantity = ticket1Quantity;
+	}
+
+	public float getTicket1Cost() {
+		return ticket1Cost;
+	}
+
+	public void setTicket1Cost(float ticket1Cost) {
+		this.ticket1Cost = ticket1Cost;
+	}
+
+	public int getTicket2Quantity() {
+		return ticket2Quantity;
+	}
+
+	public void setTicket2Quantity(int ticket2Quantity) {
+		this.ticket2Quantity = ticket2Quantity;
+	}
+
+	public float getTicket2Cost() {
+		return ticket2Cost;
+	}
+
+	public void setTicket2Cost(float ticket2Cost) {
+		this.ticket2Cost = ticket2Cost;
+	}
+
+	public int getTicket3Quantity() {
+		return ticket3Quantity;
+	}
+
+	public void setTicket3Quantity(int ticket3Quantity) {
+		this.ticket3Quantity = ticket3Quantity;
+	}
+
+	public float getTicket3Cost() {
+		return ticket3Cost;
+	}
+
+	public void setTicket3Cost(float ticket3Cost) {
+		this.ticket3Cost = ticket3Cost;
 	}
 
 	public String getTimeOfEvent() {
