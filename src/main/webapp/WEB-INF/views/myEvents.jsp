@@ -9,7 +9,12 @@
 	<div class="Container">
 		
 		<div class="top">
-	      	<h1>Your subscribed Event's list</h1>
+			<c:if test="${!empty listEventsForParticipant}">
+	      		<h1>Your subscribed Event's list</h1>
+	      	</c:if>
+	      	<c:if test="${!empty listEventsForOrganizer}">
+	      		<h1>Your Event's list</h1>
+	      	</c:if>
 		</div>
 		<br><br><br>
 		<c:if test="${!empty listEventsForParticipant}">
@@ -20,7 +25,7 @@
 	          <h2 class="featurette-heading"><c:out value="${eventInfo.event.name},"/></h2>
 	          <h3><span class="text-muted"><br><c:out value="${eventInfo.event.dateOfEvent}, ${eventInfo.event.place}"/></span></h3>
 	          <p class="lead"><c:out value="${eventInfo.event.subtitle}"/></p>
-	          <p class="float-to-bottom"><a class="btn btn-primary" href="<c:url value="/main/event/${eventInfo.event.id}" />" role="button">View details »</a></p>
+	          <p class="float-to-bottom"><a class="btn btn-primary" href="<c:url value="/main/event/getEvent/${eventInfo.event.id}" />" role="button">View details »</a></p>
 	        </div>
 	        <div class="col-md-5 <% if(i % 2 == 0 ){out.println("col-md-pull-7");} %> right">
 	          <img class="featurette-image img-responsive center-block" src="<c:url value="/resources/img/events/eventone.jpg" />" data-holder-rendered="true">
@@ -33,18 +38,21 @@
 	      
 	      <!-- organizer part -->
 	      <c:if test="${!empty listEventsForOrganizer}">
-		<c:forEach items="${listEventsForOrganizer}" var="eventInfo">
-		<hr class="featurette-divider">
-		  <div class="row featurette">	  	
-	        <div class="col-md-7">
-	          <h2 class="featurette-heading"><c:out value="${eventInfo.name}"/></h2>
-	          <h2 class="featurette-heading"><c:out value="${eventInfo.place}"/><span class="text-muted"><c:out value="${eventInfo.dateOfEvent}"/></span></h2>
+	      <% int i = 1; %>
+		  <c:forEach items="${listEventsForOrganizer}" var="eventInfo">
+			<div class="row featurette same-height-container">	  	
+	        <div class="col-md-7 <% if(i % 2 == 0 ){out.println("col-md-push-5");} %> same-height-inContainer">
+	          <h2 class="featurette-heading"><c:out value="${eventInfo.name},"/></h2>
+	          <h3><span class="text-muted"><br><c:out value="${eventInfo.dateOfEvent}, ${eventInfo.place}"/></span></h3>
 	          <p class="lead"><c:out value="${eventInfo.subtitle}"/></p>
+	          <p class="float-to-bottom"><a class="btn btn-primary" href="<c:url value="/main/event/getEvent/${eventInfo.id}" />" role="button">View details »</a></p>
 	        </div>
-	        <div class="col-md-5">
+	        <div class="col-md-5 <% if(i % 2 == 0 ){out.println("col-md-pull-7");} %> right">
 	          <img class="featurette-image img-responsive center-block" src="<c:url value="/resources/img/events/eventone.jpg" />" data-holder-rendered="true">
 	        </div>
 	      </div>
+	      <hr class="featurette-divider">
+	      	  <% i++; %>
 	      	</c:forEach>
 	      </c:if>
 	</div>

@@ -22,7 +22,7 @@ public class TicketManager {
         {
         	ticket = (Ticket) session.createQuery(
                     "from Ticket" + " where eventid = ?").setInteger(0,
-                    id).uniqueResult();
+                    id).list().get(0);
             session.getTransaction().commit();
         }
         catch (HibernateException e)

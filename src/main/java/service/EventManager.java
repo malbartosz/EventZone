@@ -26,12 +26,13 @@ public class EventManager {
 		Session session = HibernateUtil.getSessionFactory()
                 .getCurrentSession();
         session.beginTransaction();
+        int myid = Integer.parseInt(id);
         try
         {
         	event = (Event) session
 					.createQuery("from Event" 
 							+ " where id = ?")
-							.setString(0, id).uniqueResult();
+							.setInteger(0, myid).uniqueResult();
 			session.getTransaction().commit();
         }
         catch (HibernateException e)
@@ -132,9 +133,5 @@ public class EventManager {
         }
     }
     
-    public boolean subscribeToAnEvent(int eventId){
-    	
-    	
-    	return true;
-    }
+   
 }

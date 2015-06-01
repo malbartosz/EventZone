@@ -1,10 +1,15 @@
 package controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javassist.expr.NewArray;
 import model.Event;
 import model.Participant;
 import model.Ticket;
 import model.User;
 import model.EventFormObject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,8 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import exceptions.accountcreateexcpetions.LoginAlreadyInUse;
 import exceptions.CreateEventException;
 import service.EventFormObjectManager;
@@ -38,10 +45,10 @@ public class EventController {
 	private TicketManager ticketManager = new TicketManager();
 	
 	//@Autowired
-	private UserManagerImpl userManager;
+	private UserManagerImpl userManager =  new UserManagerImpl();
 	
-	@RequestMapping("event/{id}")
-	public ModelAndView getSingleEventPage(@PathVariable String id/*, @ModelAttribute boolean justSubs*/){
+	@RequestMapping(value="event/getEvent/{id}",  method=RequestMethod.GET)
+	public ModelAndView getSingleEventPage(@PathVariable String id){
 		ModelAndView model = new ModelAndView("event/singleEvent");		
 		
 		String username = 
@@ -55,18 +62,16 @@ public class EventController {
 		return model; 
 	}
 	
-	@RequestMapping(value = "event/subscribe/{eventId}", method=RequestMethod.GET)
-	public String subscribeToAnEvent(@PathVariable String eventId, int ifPaid, final RedirectAttributes redirectAttrs){		
+	@RequestMapping(value = "event/subscribe/", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Boolean> subscribeToAnEvent(String eventId, int ifPaid){		
 		System.out.println("hehe in subscribeevent");
 		String username = 
 				SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Ticket ticket = ticketManager.getTicketByEventId(Integer.parseInt(eventId));
 		System.out.println("after Ticket");
-		User user = null;
-		try {
-			user = userManager.getUserByLogin(username);
-		} catch (LoginAlreadyInUse e) { }
+		User user = userManager.findUserByLogin(username);
+		
 		System.out.println("after user");
 
 		Event event = eventManager.getEventById(eventId);
@@ -75,10 +80,11 @@ public class EventController {
 		Participant participant = new Participant(ifPaid, ticket, event, user);
 		System.out.println("after parti");
 
-		boolean justSubs = participantManager.saveParticipant(participant);
-		redirectAttrs.addFlashAttribute("justSubs", justSubs);
+		final boolean subsribed = participantManager.saveParticipant(participant);
+		//redirectAttrs.addFlashAttribute("subscribed", justSubs);
 		
-		return "redirect:/main/event/" + eventId;
+		return  new HashMap<String, Boolean>(1){{put("result", subsribed);}};
+
 	}
 	
 	@RequestMapping("event/create")
