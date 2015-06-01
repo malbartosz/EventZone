@@ -1,8 +1,6 @@
 package output;
 
 
-import java.util.Date;
-
 import model.Event;
 
 public class EventInfoForParticipant {

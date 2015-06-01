@@ -89,7 +89,7 @@
 				<div class="form-group">
 					<form:label path="dateOfEvent" for="dateOfEvent"
 						class="lead control-label">Date</form:label>
-					<form:input path="dateOfEvent" type="date"
+					<form:input path="dateOfEvent" type="text"
 						class="form-control" value="YYYY-MM-DD" id="dateOfEvent"
 						name="dateOfEvent" required="true"></form:input>
 					<span class="help-block"></span>
@@ -124,7 +124,7 @@
 					<span class="help-block"></span>
 
 					<form:label path="ticket1Cost" for="ticket1Cost"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Cost</form:label>
 					<form:input path="ticket1Cost" type="text" class="form-control"
 						id="ticket1Cost" name="ticket1Cost"></form:input>
 					<span class="help-block"></span>
@@ -137,7 +137,7 @@
 					<span class="help-block"></span>
 
 					<form:label path="ticket2Cost" for="ticket2Cost"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Cost</form:label>
 					<form:input path="ticket2Cost" type="text" class="form-control"
 						id="ticket2Cost" name="ticket2Cost"></form:input>
 					<span class="help-block"></span>
@@ -150,7 +150,7 @@
 					<span class="help-block"></span>
 
 					<form:label path="ticket3Cost" for="ticket3Cost"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Cost</form:label>
 					<form:input path="ticket3Cost" type="text" class="form-control"
 						id="ticket3Cost" name="ticket3Cost"></form:input>
 					<span class="help-block"></span>
