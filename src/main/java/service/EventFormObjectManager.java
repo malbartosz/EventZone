@@ -17,8 +17,8 @@ public class EventFormObjectManager {
 		this.ticketManager = new TicketManager();
 		String picturePath = checkPictureFile(eventFormObject);
 		String backgroundPath = checkBackgroundFile(eventFormObject);
-		eventFormObject.setPictureNewPath(picturePath);
-		eventFormObject.setBackgroundNewPath(backgroundPath);
+		eventFormObject.setPicture(picturePath);
+		eventFormObject.setBackgroundFile(backgroundPath);
 		Event event = eventFormObject.getEvent();
 		event.setPicture(picturePath);
 		event.setBackgroundFile(backgroundPath);

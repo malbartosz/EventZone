@@ -71,7 +71,7 @@
 					</p>
 					<p>
 						<a class="btn btn-primary"
-							href="<c:url value="/main/event/${event.id}" />" role="button">View
+							href="<c:url value="/main/event/getEvent/${event.id}" />" role="button">View
 							details »</a>
 					</p>
 				</div>

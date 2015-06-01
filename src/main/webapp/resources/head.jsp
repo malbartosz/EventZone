@@ -23,6 +23,6 @@
 <body class ="main_style">
 	
 	
- 	<div onclick="location.href='/EventZone/';" style="cursor:pointer;"  id="page_header">
+ 	<div onclick="location.href='/EventZone/main';" style="cursor:pointer;"  id="page_header">
 		<img class="logo" src="<c:url value="/resources/logo.png" />">
 	</div>

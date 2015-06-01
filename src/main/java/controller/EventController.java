@@ -169,7 +169,7 @@ public class EventController {
 //			model.addObject("error", e);
 //			return model;
 //		}
-		model = new ModelAndView("redirect:/main/event/" + String.valueOf(id));
+		model = new ModelAndView("redirect:/main/event/getEvent/" + String.valueOf(id));
 		
 		return model;
 
