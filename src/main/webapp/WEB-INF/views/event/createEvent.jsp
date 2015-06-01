@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <jsp:include page="/resources/head.jsp" />
+<jsp:include page="../navbar.jsp"/>
+
 <!-- cdn for modernizr, if you haven't included it already -->
 <script
 	src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
@@ -15,43 +17,8 @@
 	});
 	webshims.polyfill('forms forms-ext');
 </script>
-<div class="fixedElement">
-	<nav class="navbar navbar-inverse" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target=".navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/EventZone/">EventZone</a>
-		</div>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse navbar-ex1-collapse">
-			<ul class="nav navbar-nav">
-				<li><a href="<c:url value="/main" />">Home</a></li>
-				<li class="dropdown active"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown" role="button" aria-expanded="false">Events<span
-						class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Create an Event</a></li>
-						<li><a href="<c:url value="/listForOrganizer/" />">Manage
-								my Events</a></li>
-						<li class="divider"></li>
-						<li><a href="#">Subscribe to an Event</a></li>
-						<li><a href="<c:url value="/listForParticipant/" />">Manage
-								subscribed Events</a></li>
-					</ul></li>
-				<li><a href="#">My Tickets</a></li>
-				<li class="divider"></li>
-				<li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</nav>
-</div>
+
 
 <div class="Container">
 
@@ -89,7 +56,7 @@
 				<div class="form-group">
 					<form:label path="dateOfEvent" for="dateOfEvent"
 						class="lead control-label">Date</form:label>
-					<form:input path="dateOfEvent" type="date"
+					<form:input path="dateOfEvent" type="text"
 						class="form-control" value="YYYY-MM-DD" id="dateOfEvent"
 						name="dateOfEvent" required="true"></form:input>
 					<span class="help-block"></span>
@@ -124,7 +91,7 @@
 					<span class="help-block"></span>
 
 					<form:label path="ticket1Cost" for="ticket1Cost"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Cost</form:label>
 					<form:input path="ticket1Cost" type="text" class="form-control"
 						id="ticket1Cost" name="ticket1Cost"></form:input>
 					<span class="help-block"></span>
@@ -137,7 +104,7 @@
 					<span class="help-block"></span>
 
 					<form:label path="ticket2Cost" for="ticket2Cost"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Cost</form:label>
 					<form:input path="ticket2Cost" type="text" class="form-control"
 						id="ticket2Cost" name="ticket2Cost"></form:input>
 					<span class="help-block"></span>
@@ -150,7 +117,7 @@
 					<span class="help-block"></span>
 
 					<form:label path="ticket3Cost" for="ticket3Cost"
-						class="lead control-label">Quantity</form:label>
+						class="lead control-label">Cost</form:label>
 					<form:input path="ticket3Cost" type="text" class="form-control"
 						id="ticket3Cost" name="ticket3Cost"></form:input>
 					<span class="help-block"></span>
@@ -174,6 +141,6 @@
 			</form:form>
 		</div>
 	</div>
-
+</div>
 
 	<jsp:include page="/resources/footer.jsp" />

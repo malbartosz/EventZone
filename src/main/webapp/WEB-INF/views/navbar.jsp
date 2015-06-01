@@ -23,7 +23,7 @@
                   <li><a href="/EventZone/main/listForOrganizer/">Manage my Events</a></li>
                   <li class="divider"></li>
                   <li><a href="main/event/find">Find an Event</a></li>
-                  <li><a href="<c:url value="listForParticipant/"/>">Manage subscribed Events</a></li>
+                  <li><a href="/EventZone/main/listForParticipant">Manage subscribed Events</a></li>
                 </ul>
               </li>
               <li ><a href="#">My Tickets</a></li>

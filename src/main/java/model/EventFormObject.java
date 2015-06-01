@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Date;
-
 public class EventFormObject {
 	public EventFormObject() {
 	};
@@ -13,8 +11,8 @@ public class EventFormObject {
 		this.dateOfEvent = dateOfEvent;
 		this.place = place;
 		this.description = description;
-	//	this.picture = picture;
-	//	this.backgroundFile = backgroundFile;
+		this.picture = picture;
+		this.backgroundFile = backgroundFile;
 		this.timeOfEvent = timeOfEvent;
 	}
 	
@@ -30,8 +28,8 @@ public class EventFormObject {
 		this.dateOfEvent = dateOfEvent;
 		this.dateOfCreation = dateOfCreation;
 		this.description = description;
-	//	this.picture = picture;
-	//	this.backgroundFile = backgroundFile;
+		this.picture = picture;
+		this.backgroundFile = backgroundFile;
 		this.timeOfEvent = timeOfEvent;
 	}
 
@@ -42,18 +40,18 @@ public class EventFormObject {
 	private String dateOfEvent;
 	private String dateOfCreation;
 	private String description;
-//	private String picture;
-//	private String backgroundFile;
+	private String picture;
+	private String backgroundFile;
 	private String timeOfEvent;
-//	private int ticket1Quantity;
-//	private float ticket1Cost;
-//	private int ticket2Quantity;
-//	private float ticket2Cost;
-//	private int ticket3Quantity;
-//	private float ticket3Cost;
+	private int ticket1Quantity;
+	private float ticket1Cost;
+	private int ticket2Quantity;
+	private float ticket2Cost;
+	private int ticket3Quantity;
+	private float ticket3Cost;
 	
 	public Event getEvent() {
-	return null;//	return new Event(name, dateOfEvent, subtitle, organizer, place, description, picture, backgroundFile, timeOfEvent);
+		return new Event(name, dateOfEvent, dateOfCreation, subtitle, organizer, place, description, picture, backgroundFile, timeOfEvent);
 	}
 		
 	public String getDescription() {
@@ -105,13 +103,13 @@ public class EventFormObject {
 	}
 
 
-//	public String getPicture() {
-//		return picture;
-//	}
-//
-//	public void setPicture(String picture) {
-//		this.picture = picture;
-//	}
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 
 	public String getSubtitle() {
 		return subtitle;
@@ -121,61 +119,61 @@ public class EventFormObject {
 		this.subtitle = subtitle;
 	}
 
-//	public String getBackgroundFile() {
-//		return backgroundFile;
-//	}
-//
-//	public void setBackgroundFile(String backgroundFile) {
-//		this.backgroundFile = backgroundFile;
-//	}
+	public String getBackgroundFile() {
+		return backgroundFile;
+	}
 
-//	public int getTicket1Quantity() {
-//		return ticket1Quantity;
-//	}
-//
-//	public void setTicket1Quantity(int ticket1Quantity) {
-//		this.ticket1Quantity = ticket1Quantity;
-//	}
-//
-//	public float getTicket1Cost() {
-//		return ticket1Cost;
-//	}
-//
-//	public void setTicket1Cost(float ticket1Cost) {
-//		this.ticket1Cost = ticket1Cost;
-//	}
-//
-//	public int getTicket2Quantity() {
-//		return ticket2Quantity;
-//	}
-//
-//	public void setTicket2Quantity(int ticket2Quantity) {
-//		this.ticket2Quantity = ticket2Quantity;
-//	}
-//
-//	public float getTicket2Cost() {
-//		return ticket2Cost;
-//	}
-//
-//	public void setTicket2Cost(float ticket2Cost) {
-//		this.ticket2Cost = ticket2Cost;
-//	}
-//
-//	public int getTicket3Quantity() {
-//		return ticket3Quantity;
-//	}
-//
-//	public void setTicket3Quantity(int ticket3Quantity) {
-//		this.ticket3Quantity = ticket3Quantity;
-//	}
-//
-//	public float getTicket3Cost() {
-//		return ticket3Cost;
-//	}
-//
-//	public void setTicket3Cost(float ticket3Cost) {
-//		this.ticket3Cost = ticket3Cost;
-//	}
+	public void setBackgroundFile(String backgroundFile) {
+		this.backgroundFile = backgroundFile;
+	}
+
+	public int getTicket1Quantity() {
+		return ticket1Quantity;
+	}
+
+	public void setTicket1Quantity(String ticket1Quantity) {
+		this.ticket1Quantity = Integer.valueOf(ticket1Quantity);
+	}
+
+	public float getTicket1Cost() {
+		return ticket1Cost;
+	}
+
+	public void setTicket1Cost(String ticket1Cost) {
+		this.ticket1Cost = Float.valueOf(ticket1Cost);
+	}
+
+	public int getTicket2Quantity() {
+		return ticket2Quantity;
+	}
+
+	public void setTicket2Quantity(String ticket2Quantity) {
+		this.ticket2Quantity = Integer.valueOf(ticket2Quantity);
+	}
+
+	public float getTicket2Cost() {
+		return ticket2Cost;
+	}
+
+	public void setTicket2Cost(String ticket2Cost) {
+		this.ticket2Cost = Float.valueOf(ticket2Cost);
+	}
+
+	public int getTicket3Quantity() {
+		return ticket3Quantity;
+	}
+
+	public void setTicket3Quantity(String ticket3Quantity) {
+		this.ticket3Quantity = Integer.valueOf(ticket3Quantity);
+	}
+
+	public float getTicket3Cost() {
+		return ticket3Cost;
+	}
+
+	public void setTicket3Cost(String ticket3Cost) {
+		this.ticket3Cost = Float.valueOf(ticket3Cost);
+	}
 
 	public String getTimeOfEvent() {
 		return timeOfEvent;

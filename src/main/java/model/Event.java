@@ -18,6 +18,21 @@ public class Event {
 	public Event() {
 	};
 
+	public Event(String name, String dateOfEvent, String dateOfCreation, String subtitle,
+			String organizer, String place, String description, String picture,
+			String backgroundFile, String timeOfEvent) {
+		this.name = name;
+		this.subtitle = subtitle;
+		this.organizer = organizer;
+		this.dateOfEvent = dateOfEvent;
+		this.place = place;
+		this.description = description;
+		this.picture = picture;
+		this.backgroundFile = backgroundFile;
+		this.timeOfEvent = timeOfEvent;
+		this.dateOfCreation = dateOfCreation;
+	}
+	
 	public Event(String name, String dateOfEvent, String subtitle,
 			String organizer, String place, String description, String picture,
 			String backgroundFile, String timeOfEvent) {

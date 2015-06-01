@@ -7,9 +7,6 @@ import model.Event;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import output.EventInfoForParticipant;
 import util.HibernateUtil;
 
 /**
@@ -20,19 +17,19 @@ public class EventManager {
 	
 	
 	
-	public Event getEventById(String id){
+	public Event getEventById(int id){
 		Event event = new Event();
 		
 		Session session = HibernateUtil.getSessionFactory()
                 .getCurrentSession();
         session.beginTransaction();
-        int myid = Integer.parseInt(id);
+       // long myid = Integer.parseInt(id);
         try
         {
         	event = (Event) session
 					.createQuery("from Event" 
-							+ " where id = ?")
-							.setInteger(0, myid).uniqueResult();
+							+ " where id = ?").setLong(0, id).uniqueResult();
+
 			session.getTransaction().commit();
         }
         catch (HibernateException e)
@@ -92,8 +89,7 @@ public class EventManager {
         return events;
     }
     
-    @SuppressWarnings("unchecked")
-	public int getMaxEventId()
+    public int getMaxEventId()
     {
     	int maxId;
 
