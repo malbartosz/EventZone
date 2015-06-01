@@ -40,13 +40,13 @@
 		<c:if test="${!empty events}">
 		<% int i = 1; %>
 		<c:forEach items="${events}" var="event">
-		  <div class="row featurette">	  	
-	        <div class="col-md-7 <% if(i % 2 == 0 ){out.println("col-md-push-5");} %>">
+		  <div class="row featurette same-height-container">	  	
+	        <div class="col-md-7 <% if(i % 2 == 0 ){out.println("col-md-push-5");} %> same-height-inContainer">
 	          <h2 class="featurette-heading"><c:out value="${event.name}, ${event.dateOfEvent}"/><span class="text-muted"><c:out value=" ${event.place}"/></span></h2>
 	          <p class="lead"><c:out value="${event.description}"/></p>
-	          <p><a class="btn btn-primary" href="<c:url value="/main/event/${event.id}" />" role="button">View details »</a></p>
+	          <p class="float-to-bottom"><a class="btn btn-primary" href="<c:url value="/main/event/${event.id}" />" role="button">View details »</a></p>
 	        </div>
-	        <div class="col-md-5 <% if(i % 2 == 0 ){out.println("col-md-pull-7");} %>">
+	        <div class="col-md-5 <% if(i % 2 == 0 ){out.println("col-md-pull-7");} %> right">
 	          <img class="featurette-image img-responsive center-block" src="<c:url value="/resources/img/events/eventone.jpg" />" data-holder-rendered="true">
 	        </div>
 	      </div>

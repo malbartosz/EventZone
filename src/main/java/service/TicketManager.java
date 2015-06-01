@@ -11,7 +11,7 @@ import util.HibernateUtil;
 
 public class TicketManager {
 	
-    public Ticket getTicketById(int id)
+    public Ticket getTicketByEventId(int id)
     {
     	Ticket ticket = null;
 
@@ -21,7 +21,7 @@ public class TicketManager {
         try
         {
         	ticket = (Ticket) session.createQuery(
-                    "from Ticket" + " where id = ?").setInteger(0,
+                    "from Ticket" + " where eventid = ?").setInteger(0,
                     id).uniqueResult();
             session.getTransaction().commit();
         }

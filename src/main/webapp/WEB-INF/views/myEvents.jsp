@@ -15,14 +15,14 @@
 		<c:if test="${!empty listEventsForParticipant}">
 		<% int i = 1; %>
 		<c:forEach items="${listEventsForParticipant}" var="eventInfo">
-		  <div class="row featurette row-same-height">	  	
-	        <div class="col-md-7 <% if(i % 2 == 0 ){out.println("col-md-push-5");} %> col-xs-height">
+		  <div class="row featurette same-height-container">	  	
+	        <div class="col-md-7 <% if(i % 2 == 0 ){out.println("col-md-push-5");} %> same-height-inContainer">
 	          <h2 class="featurette-heading"><c:out value="${eventInfo.event.name},"/></h2>
 	          <h3><span class="text-muted"><br><c:out value="${eventInfo.event.dateOfEvent}, ${eventInfo.event.place}"/></span></h3>
 	          <p class="lead"><c:out value="${eventInfo.event.subtitle}"/></p>
-	          <p><a class="btn btn-primary" href="<c:url value="/main/event/${eventInfo.event.id}" />" role="button">View details »</a></p>
+	          <p class="float-to-bottom"><a class="btn btn-primary" href="<c:url value="/main/event/${eventInfo.event.id}" />" role="button">View details »</a></p>
 	        </div>
-	        <div class="col-md-5 <% if(i % 2 == 0 ){out.println("col-md-pull-7");} %> col-xs-height">
+	        <div class="col-md-5 <% if(i % 2 == 0 ){out.println("col-md-pull-7");} %> right">
 	          <img class="featurette-image img-responsive center-block" src="<c:url value="/resources/img/events/eventone.jpg" />" data-holder-rendered="true">
 	        </div>
 	      </div>

@@ -25,9 +25,6 @@ import service.ParticipantManager;
 @SessionAttributes
 public class LoginPage {
 
-	
-	 
-
 	@Autowired
 	private ParticipantManager participantManager;
 

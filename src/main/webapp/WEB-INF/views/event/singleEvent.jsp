@@ -25,7 +25,9 @@
 	      <div class="description">
 	      	<h3>Event description</h3>
 	      	<span class="lead"><c:out value="${event.description}"/></span>
-	         <a class="btn btn-lg btn-success" href="<c:url value="/main/event/subscribe/${event.id}" />" role="button">Click to subscribe</a>
+	      	<c:if test="${subscribed}">
+	        	 <a class="btn btn-lg btn-success" href="<c:url value="/main/event/subscribe/${event.id}" />" role="button">Click to subscribe</a>
+	      	</c:if>
 	      </div>
 	</div>
 		

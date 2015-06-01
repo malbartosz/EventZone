@@ -7,6 +7,7 @@ import model.Participant;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import output.EventInfoForParticipant;
 import output.ParticipantForOrganizer;
@@ -14,6 +15,7 @@ import util.HibernateUtil;
 
 public class ParticipantManager {
 
+	
 	public List<ParticipantForOrganizer> getAllParticipantsByEventId(int eventId) {
 		List<ParticipantForOrganizer> participants = null;
 
@@ -33,7 +35,7 @@ public class ParticipantManager {
 		return participants;
 	}
 
-	public void saveParticipant(Participant participant) {
+	public boolean saveParticipant(Participant participant) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		try {
@@ -41,8 +43,10 @@ public class ParticipantManager {
 			session.getTransaction().commit();
 		} catch (HibernateException e) {
 			session.getTransaction().rollback();
-			throw e;
+			return false;
 		}
+		
+		return true;
 	}
 
 	public boolean checkIfPaidForTicket(String personId) {
@@ -83,5 +87,22 @@ public class ParticipantManager {
 		}
 		return events;
 
+	}
+
+	public boolean checkIfSubscribed(String username, String id) {
+		boolean userSubscribed = false;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		try {
+			session.createQuery("from Participant where personId = "+ username + " and eventid = " + id)
+				.uniqueResult();
+			session.getTransaction().commit();
+			return true;
+		} catch (HibernateException e) {
+			session.getTransaction().rollback();
+			return false;
+		}		
+		
+		
 	}
 }

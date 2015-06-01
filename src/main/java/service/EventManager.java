@@ -7,6 +7,7 @@ import model.Event;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import output.EventInfoForParticipant;
 import util.HibernateUtil;
@@ -16,6 +17,8 @@ import util.HibernateUtil;
  *
  */
 public class EventManager {
+	
+	
 	
 	public Event getEventById(String id){
 		Event event = new Event();
@@ -106,6 +109,8 @@ public class EventManager {
     }
     
     public boolean subscribeToAnEvent(int eventId){
+    	
+    	
     	return true;
     }
 }

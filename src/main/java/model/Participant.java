@@ -24,6 +24,17 @@ public class Participant {
 		this.event = event;
 		this.person = person;
 	}
+	
+	public Participant(int ifPaid, Ticket ticket, Event event, User person) {
+		
+		this.ticket = ticket;
+		this.event = event;
+		this.person = person;
+		this.ifPaid = ifPaid;
+		this.eventId = event.getId();
+		this.personId = person.getLogin();
+		this.ticketId = ticket.getId();
+	}
 
 	private int id;
 	private int eventId;

@@ -18,7 +18,7 @@ public class UserManagerImpl extends UserManager {
 
 	private Session session;
 
-	public void getUserByLogin(final String login) throws LoginAlreadyInUse {
+	public User getUserByLogin(final String login) throws LoginAlreadyInUse {
 		User user = null;
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -33,7 +33,7 @@ public class UserManagerImpl extends UserManager {
 		if (user != null) {
 			throw new LoginAlreadyInUse("Given login is already in use!");
 		}
-
+		return user;
 	}
 
 	public void getUserByEmail(final String email) throws EmailAlreadyInUse {

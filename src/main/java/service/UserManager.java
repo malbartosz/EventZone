@@ -8,7 +8,7 @@ import exceptions.accountcreateexcpetions.LoginAlreadyInUse;
 
 public abstract class UserManager {
 
-	public abstract void getUserByLogin(String login) throws LoginAlreadyInUse;
+	public abstract User getUserByLogin(String login) throws LoginAlreadyInUse;
 
 	public abstract void getUserByEmail(String email) throws EmailAlreadyInUse;
 
