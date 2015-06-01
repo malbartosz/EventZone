@@ -25,8 +25,26 @@
 	      <div class="description">
 	      	<h3>Event description</h3>
 	      	<span class="lead"><c:out value="${event.description}"/></span>
-	      	<c:if test="${subscribed}">
-	        	 <a class="btn btn-lg btn-success" href="<c:url value="/main/event/subscribe/${event.id}" />" role="button">Click to subscribe</a>
+	      	<div id="eventID" hidden="hidden"><c:out value="${event.id}"/></div>
+	      	<div id="sucDiv" class="alert alert-success" role="alert" hidden="hidden">
+		      <strong>Well done!</strong> You have been subscribed.
+		    </div>
+		    <div id="errorMSG" class="alert alert-danger" role="alert" hidden="hidden">
+		      <strong>Oh snap!</strong> Something went wrong. Try again later!
+		    </div>
+	      	<div id="paymentForm" hidden="hidden">
+	      	<br><br><br>
+	      		<div>
+	      			<label>Payment</label><br>
+	      			<select id="paymentTrue">
+	      				<option value=1>Yes</option>
+	      				<option value=0>No</option>
+	      			</select>
+	      		</div>
+	      		 <button id="subscribeToEvent" class="btn btn-lg btn-success right" role="button">Click to subscribe</button>
+	      	</div>
+	      	<c:if test="${!subscribed}">
+	        	 <button id="subscribeButton" class="btn btn-lg btn-success right" role="button">Click to subscribe</button>
 	      	</c:if>
 	      </div>
 	</div>

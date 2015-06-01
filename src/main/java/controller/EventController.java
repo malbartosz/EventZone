@@ -1,5 +1,6 @@
 package controller;
 
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -12,6 +13,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Event;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javassist.expr.NewArray;
+import model.Event;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import model.Participant;
 import model.Ticket;
 import model.User;
@@ -24,12 +36,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import exceptions.accountcreateexcpetions.LoginAlreadyInUse;
+
+
 import exceptions.CreateEventException;
 import exceptions.WrongBackgroundFileExtension;
 import exceptions.WrongPictureFileExtension;
@@ -51,33 +69,29 @@ public class EventController {
 
 	// @Autowired
 	private TicketManager ticketManager = new TicketManager();
-
-	// @Autowired
-	private UserManagerImpl userManager;
-
-	@RequestMapping("event/{id}")
-	public ModelAndView getSingleEventPage(@PathVariable String id/*
-																 * ,
-																 * @ModelAttribute
-																 * boolean
-																 * justSubs
-																 */) {
-		ModelAndView model = new ModelAndView("event/singleEvent");
-
-		String username = SecurityContextHolder.getContext()
-				.getAuthentication().getName();
+	
+	//@Autowired
+	private UserManagerImpl userManager =  new UserManagerImpl();
+	
+	@RequestMapping(value="event/getEvent/{id}",  method=RequestMethod.GET)
+	public ModelAndView getSingleEventPage(@PathVariable String id){
+		ModelAndView model = new ModelAndView("event/singleEvent");		
+		
+		String username = 
+				SecurityContextHolder.getContext().getAuthentication().getName();
 		Event event = eventManager.getEventById(Integer.parseInt(id));
-		boolean isUserSubscribed = participantManager.checkIfSubscribed(
-				username, id);
+		boolean isUserSubscribed = participantManager.checkIfSubscribed(username,id);
+		
+		
 
 		model.addObject("event", event);
 		model.addObject("subscribed", isUserSubscribed);
 		return model;
 	}
+	
+	@RequestMapping(value = "event/subscribe/", method=RequestMethod.POST)
+	public @ResponseBody Map<String, Boolean> subscribeToAnEvent(String eventId, int ifPaid){		
 
-	@RequestMapping(value = "event/subscribe/{eventId}", method = RequestMethod.GET)
-	public String subscribeToAnEvent(@PathVariable String eventId, int ifPaid,
-			final RedirectAttributes redirectAttrs) {
 		System.out.println("hehe in subscribeevent");
 		String username = SecurityContextHolder.getContext()
 				.getAuthentication().getName();
@@ -85,11 +99,10 @@ public class EventController {
 		Ticket ticket = ticketManager.getTicketByEventId(Integer
 				.parseInt(eventId));
 		System.out.println("after Ticket");
-		User user = null;
-		try {
-			user = userManager.getUserByLogin(username);
-		} catch (LoginAlreadyInUse e) {
-		}
+
+		User user = userManager.findUserByLogin(username);
+		
+
 		System.out.println("after user");
 
 		Event event = eventManager.getEventById(Integer.parseInt(eventId));
@@ -98,10 +111,12 @@ public class EventController {
 		Participant participant = new Participant(ifPaid, ticket, event, user);
 		System.out.println("after parti");
 
-		boolean justSubs = participantManager.saveParticipant(participant);
-		redirectAttrs.addFlashAttribute("justSubs", justSubs);
+		final boolean subsribed = participantManager.saveParticipant(participant);
+		//redirectAttrs.addFlashAttribute("subscribed", justSubs);
+		
+		return  new HashMap<String, Boolean>(1){{put("result", subsribed);}};
 
-		return "redirect:/main/event/" + eventId;
+
 	}
 
 	@RequestMapping("event/create")

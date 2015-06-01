@@ -36,6 +36,8 @@ public class UserManagerImpl extends UserManager {
 		return user;
 	}
 
+	
+	
 	public void getUserByEmail(final String email) throws EmailAlreadyInUse {
 		User user = null;
 
@@ -97,20 +99,19 @@ public class UserManagerImpl extends UserManager {
 	
 	@SuppressWarnings("unchecked")
 	public User findUserByLogin(String login) {
-		List<User> users = new ArrayList<User>();
+		User user = null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		try {
-			users = session.createQuery("from User" + " where login = ?").setString(0, login).list();
+			user = (User) session.createQuery("from User" + " where login = ?").setString(0, login).list().get(0);
 			session.getTransaction().commit();
-			if (users.size() > 0) {
-				return users.get(0);
-			} 
+			
 		} catch (HibernateException e) {
 			session.getTransaction().rollback();
 			throw e;
 		}
-		return null;
+		
+		return user;
 	}
 
 }

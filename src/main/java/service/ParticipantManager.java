@@ -76,7 +76,7 @@ public class ParticipantManager {
 		try {
 			events = (List<EventInfoForParticipant>) session
 					.createQuery(
-							"select new output.EventInfoForParticipant(t.cost, e.name, e.dateOfEvent, e.subtitle, e.organizer, e.place, e.description, e.picture, e.backgroundFile, e.timeOfEvent)" 
+							"select new output.EventInfoForParticipant(t.cost, e.id, e.name, e.dateOfEvent, e.subtitle, e.organizer, e.place, e.description, e.picture, e.backgroundFile, e.timeOfEvent)" 
 					+ " from Participant p join p.ticket t join p.event e"
 									+ " where personId = ?")
 					.setString(0, personId).list();
@@ -92,18 +92,22 @@ public class ParticipantManager {
 
 	public boolean checkIfSubscribed(String username, String id) {
 		//boolean userSubscribed = false;
+		System.out.println("U: " + username + " ID: " + id);
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
+		Object o = null;
 		try {
-			session.createQuery("from Participant where personId = "+ username + " and eventid = " + id)
-				.uniqueResult();
+			o = session.createQuery("from Participant where personId = ?"+ " and eventid = " + id)
+				.setString(0, username).uniqueResult();
 			session.getTransaction().commit();
-			return true;
+			
 		} catch (HibernateException e) {
 			session.getTransaction().rollback();
 			return false;
 		}		
-		
+		if(o!=null)
+			return true;
+		return false;
 		
 	}
 }
