@@ -7,6 +7,7 @@ import model.Event;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+
 import util.HibernateUtil;
 
 /**
@@ -128,6 +129,13 @@ public class EventManager {
             throw e;
         }
     }
+
+	public boolean isUserTheOrganizer(String username,String id) {
+		Event event = getEventById(Integer.parseInt(id));
+		if(event.getOrganizer().equals(username))
+			return true;
+		return false;
+	}
     
    
 }

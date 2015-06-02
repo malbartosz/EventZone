@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Event;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javassist.expr.NewArray;
@@ -36,18 +37,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import output.ParticipantForOrganizer;
 import exceptions.accountcreateexcpetions.LoginAlreadyInUse;
-
-
 import exceptions.CreateEventException;
 import exceptions.WrongBackgroundFileExtension;
 import exceptions.WrongPictureFileExtension;
@@ -82,8 +79,13 @@ public class EventController {
 		Event event = eventManager.getEventById(Integer.parseInt(id));
 		boolean isUserSubscribed = participantManager.checkIfSubscribed(username,id);
 		
-		
-
+		List<ParticipantForOrganizer> participants = 
+				participantManager.getAllParticipantsByEventId(Integer.parseInt(id));
+		if(eventManager.isUserTheOrganizer(username,id) && !participants.isEmpty()){
+			model.addObject("isOrganizer", true);
+			model.addObject("participants", participants);
+		}else
+			model.addObject("isOrganizer", false);
 		model.addObject("event", event);
 		model.addObject("subscribed", isUserSubscribed);
 		return model;

@@ -58,6 +58,14 @@
     z-index:100;
 }
 
+#participantsForEvent{
+	margin-top: 50px;
+}
+
+#sucDiv{
+	margin-top: 50px;
+}
+
 #standard_logging_form{
 	float: left;
 }

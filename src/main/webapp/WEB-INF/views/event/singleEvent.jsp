@@ -46,6 +46,18 @@
 	      	<c:if test="${!subscribed}">
 	        	 <button id="subscribeButton" class="btn btn-lg btn-success right" role="button">Click to subscribe</button>
 	      	</c:if>
+	      	<c:if test="${isOrganizer}">
+	      		<div id="participantsForEvent">
+	      		<h2>Participants</h2><br><br>
+	      		<c:forEach items="${participants}" var="participant">
+				  <div>	  	
+			      	Login: <c:out value="${participant.login}"/>, Email: <c:out value="${participant.email}"/>
+			      </div>
+			      <hr class="featurette-divider">
+	      	</c:forEach>
+	      		</div>
+	      	</c:if>
+	      	
 	      </div>
 	</div>
 		

@@ -24,9 +24,7 @@
 
 	<div class="top">
 		<h2>
-			Welcome
-			<c:out value="${username}"></c:out>
-			! This is a page to create new event!
+			Creating an Event
 		</h2>
 	</div>
 

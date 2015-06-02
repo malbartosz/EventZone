@@ -50,7 +50,7 @@ public class EventFormObjectManager {
 	private String checkPictureFile(EventFormObject eventFormObject)
 			throws WrongPictureFileExtension {
 		String picturePath = eventFormObject.getPicture(); //.getOriginalFilename();
-		if (picturePath.length() > 0) {
+		if (picturePath != null) {
 			String pictureExtension = picturePath.substring(
 					picturePath.lastIndexOf('.') + 1, picturePath.length());
 			if (pictureExtension.equals("jpg")
@@ -69,7 +69,7 @@ public class EventFormObjectManager {
 	private String checkBackgroundFile(EventFormObject eventFormObject)
 			throws WrongBackgroundFileExtension {
 		String backgroundPath = eventFormObject.getBackgroundFile(); //.getOriginalFilename();
-		if (backgroundPath.length() > 0) {
+		if (backgroundPath != null) {
 			String backgroundExtension = backgroundPath.substring(
 					backgroundPath.lastIndexOf('.') + 1, backgroundPath.length());
 			if (backgroundExtension.equals("pdf")) {
